@@ -541,7 +541,7 @@ Potential extensions include:
 
 ## 16. Author
 
-**Kiran Prasanth**
+**Kiran P S**
 
 M.Tech – Data Science
 
