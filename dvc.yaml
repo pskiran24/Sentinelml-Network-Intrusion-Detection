@@ -1,0 +1,33 @@
+
+stages:
+
+  train:
+    cmd: python -m src.sentinelml.train all
+
+    deps:
+      - data/interim/rt_iot2022_modeling.csv
+      - data/processed/split_manifest.csv
+      - src/sentinelml/__init__.py
+      - src/sentinelml/config.py
+      - src/sentinelml/data_validation.py
+      - src/sentinelml/preprocessing.py
+      - src/sentinelml/train.py
+
+    outs:
+      - artifacts/binary_tuned_random_forest.joblib
+      - artifacts/multiclass_weighted_xgboost.joblib
+      - artifacts/multiclass_label_encoder.joblib
+
+  evaluate:
+    cmd: python -m src.sentinelml.evaluate
+
+    deps:
+      - src/sentinelml/evaluate.py
+      - artifacts/binary_tuned_random_forest.joblib
+      - artifacts/multiclass_weighted_xgboost.joblib
+      - artifacts/multiclass_label_encoder.joblib
+      - data/interim/rt_iot2022_modeling.csv
+      - data/processed/split_manifest.csv
+
+    outs:
+      - reports/metrics

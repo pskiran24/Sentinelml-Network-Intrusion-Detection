@@ -1,0 +1,79 @@
+schema: '2.0'
+stages:
+  train:
+    cmd: python -m src.sentinelml.train all
+    deps:
+    - path: data/interim/rt_iot2022_modeling.csv
+      hash: md5
+      md5: 3517cb3924497ad9546ddac181018a4e
+      size: 51031095
+    - path: data/processed/split_manifest.csv
+      hash: md5
+      md5: 5dbbebf8b0ef169132cc108420e149ea
+      size: 1684555
+    - path: src/sentinelml/__init__.py
+      hash: md5
+      md5: d41d8cd98f00b204e9800998ecf8427e
+      size: 0
+    - path: src/sentinelml/config.py
+      hash: md5
+      md5: cc2a50cad06e9c78be516f42e36c408d
+      size: 4519
+    - path: src/sentinelml/data_validation.py
+      hash: md5
+      md5: 9a6f59b7cc4ec86220aff76988f53a40
+      size: 7828
+    - path: src/sentinelml/preprocessing.py
+      hash: md5
+      md5: a176b98f8018a631fe118397d1547cf3
+      size: 8380
+    - path: src/sentinelml/train.py
+      hash: md5
+      md5: 59f81043e17a280a46c754aa59112c1c
+      size: 16339
+    outs:
+    - path: artifacts/binary_tuned_random_forest.joblib
+      hash: md5
+      md5: c3e78c62b45f9ac29000fa7556de78ba
+      size: 5626523
+    - path: artifacts/multiclass_label_encoder.joblib
+      hash: md5
+      md5: e7185438994743616eadd56cb513c05d
+      size: 684
+    - path: artifacts/multiclass_weighted_xgboost.joblib
+      hash: md5
+      md5: 05fdb37cd99531fbc626b627d9fa3c63
+      size: 3034299
+  evaluate:
+    cmd: python -m src.sentinelml.evaluate
+    deps:
+    - path: artifacts/binary_tuned_random_forest.joblib
+      hash: md5
+      md5: c3e78c62b45f9ac29000fa7556de78ba
+      size: 5626523
+    - path: artifacts/multiclass_label_encoder.joblib
+      hash: md5
+      md5: e7185438994743616eadd56cb513c05d
+      size: 684
+    - path: artifacts/multiclass_weighted_xgboost.joblib
+      hash: md5
+      md5: 05fdb37cd99531fbc626b627d9fa3c63
+      size: 3034299
+    - path: data/interim/rt_iot2022_modeling.csv
+      hash: md5
+      md5: 3517cb3924497ad9546ddac181018a4e
+      size: 51031095
+    - path: data/processed/split_manifest.csv
+      hash: md5
+      md5: 5dbbebf8b0ef169132cc108420e149ea
+      size: 1684555
+    - path: src/sentinelml/evaluate.py
+      hash: md5
+      md5: bc43a5755aaf8267481e696bb8837ce8
+      size: 7284
+    outs:
+    - path: reports/metrics
+      hash: md5
+      md5: 5ad2d68fefa8b3f26bd6190353a6b61b.dir
+      size: 3142
+      nfiles: 7
