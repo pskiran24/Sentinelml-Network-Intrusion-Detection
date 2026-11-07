@@ -38,3 +38,6 @@ Thumbs.db
 
 # Logs
 *.log
+
+# Generated monitoring reports
+reports/monitoring/*.html
